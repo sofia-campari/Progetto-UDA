@@ -1,13 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Model;
 
-/**
- *
- * @author camparis
- */
 public class Iscrizione {
-    
+    private Studente studente;
+    private Attivita attivita;
+    private String turno; // "prima" o "dopo"
+    private boolean isIscritto;
+
+    public Studente getStudente(){
+        return this.studente;
+    }
+    public Attivita getAttivita(){
+        return this.attivita;
+    }
+    public String getTurno(){
+        return this.turno;
+    }
 }

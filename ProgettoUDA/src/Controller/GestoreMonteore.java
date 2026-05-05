@@ -1,20 +1,68 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package Controller;
 
-/**
- *
- * @author camparis
- */
-public class GestoreMonteore {
+import Model.Attivita;
+import Model.Iscrizione;
+import java.util.List;
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+public class GestoreMonteore {
+    /*
+    private GiornataMonteOre model;
+    private Utente utenteCorrente;
+
+    // ================= FILE =================
+    public void apriFile(File file){
+        
     }
-    
+    public void salva(File file){
+        
+    }
+    public void salvaConNome(File file){
+        
+    }
+
+    // ================= LOGIN =================
+    public void login(String user, String pass)
+
+    private void checkAdmin()
+
+    // ================= CRUD =================
+    public void aggiungiStudente(String nome, String cognome, String classe){
+        
+    }
+
+    public void aggiungiAttivita(String nome, String descrizione, int max){
+        
+    }
+
+    public void iscriviStudente(Attivita a, String fascia){
+        
+    }
+
+    public void modificaIscrizione(Iscrizione i, Attivita nuova){
+        
+    }
+
+    public void eliminaIscrizione(Iscrizione i){
+        
+    }
+
+    public List<Iscrizione> getLista(){
+        
+    }
+
+    // ================= RICERCA =================
+    public List<Iscrizione> cerca(String classe, String attivita){
+        
+    }
+
+    // ================= ORDINAMENTO =================
+    public List<Studente> ordinaPerCognome(){
+        
+    }
+            
+    if(a.isFull(model.getIscrizioni())) {
+        throw new IllegalStateException("Attività piena");
+    }
+
+    */
 }
