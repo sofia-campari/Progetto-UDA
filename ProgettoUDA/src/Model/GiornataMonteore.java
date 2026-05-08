@@ -1,5 +1,6 @@
 package Model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GiornataMonteore {
@@ -7,28 +8,55 @@ public class GiornataMonteore {
     private List<Attivita> attivita;
     private List<Iscrizione> iscrizioni;
 
-    public void aggiungiStudente(Studente s){
-        
-    }
-    public void aggiungiAttivita(Attivita a){
-        
-    }
-    public void aggiungiIscrizione(Iscrizione i){
-        
+    public GiornataMonteore() {
+        studenti = new ArrayList<>();
+        attivita = new ArrayList<>();
+        iscrizioni = new ArrayList<>();
     }
 
-    public void rimuoviIscrizione(Iscrizione i){
-        
+    // STUDENTI
+
+    public void aggiungiStudente(Studente s) {
+        if (!studenti.contains(s)) {
+            studenti.add(s);
+        }
     }
-    /*
-    public List<Iscrizione> getIscrizioni(){
-        
+
+    public List<Studente> getStudenti() {
+        return studenti;
     }
-    public List<Studente> getStudenti(){
-        
+
+    // ATTIVITA
+
+    public void aggiungiAttivita(Attivita a) {
+        if (!attivita.contains(a)) {
+            attivita.add(a);
+        }
     }
-    public List<Attivita> getAttivita(){
-        
+
+    public List<Attivita> getAttivita() {
+        return attivita;
     }
-    */
+
+    // ISCRIZIONI
+
+    public void aggiungiIscrizione(Iscrizione i) {
+        iscrizioni.add(i);
+    }
+
+    public void rimuoviIscrizione(Iscrizione i) {
+        iscrizioni.remove(i);
+    }
+
+    public List<Iscrizione> getIscrizioni() {
+        return iscrizioni;
+    }
+
+    @Override
+    public String toString() {
+
+        return "Studenti: " + studenti.size()
+                + " | Attività: " + attivita.size()
+                + " | Iscrizioni: " + iscrizioni.size();
+    }
 }
