@@ -1,1 +1,16 @@
-
+nome,cognome,classe,turno,nomeattivita,isIscritto
+Marco,Rossi,3A,Primo,Calcio,true
+Luca,Bianchi,4B,Secondo,Teatro,true
+Giulia,Verdi,5C,Primo,Musica,true
+Ulisse,Marino,2A,Secondo,Arte,true
+Paolo,Gialli,3B,Secondo,Informatica,true
+Sara,Ricci,4A,Primo,Danza,true
+Matteo,Ferrari,5A,Secondo,Cinema,true
+Elena,Romano,2B,Secondo,Scacchi,true
+Davide,Greco,3C,Primo,Robotica,true
+Mara,Guidetti,4D,Primo,Fotografia,true
+Simone,Marini,5B,Secondo,Pallavolo,true
+Federica,Moretti,2C,Secondo,Cucina,true
+Andrea,Lombardi,3A,Secondo,Giornalismo,true
+Martina,Barbieri,4B,Primo,Podcast,true
+Riccardo,DeLuca,5C,Primo,Volontariato,true

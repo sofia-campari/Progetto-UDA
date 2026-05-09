@@ -1,68 +1,198 @@
 package Controller;
 
-import Model.Attivita;
-import Model.Iscrizione;
+import Model.*;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class GestoreMonteore {
-    /*
-    private GiornataMonteOre model;
+
+    private GiornataMonteore model;
+    private GestoreCSV gestoreCSV;
     private Utente utenteCorrente;
 
-    // ================= FILE =================
-    public void apriFile(File file){
-        
-    }
-    public void salva(File file){
-        
-    }
-    public void salvaConNome(File file){
-        
+    public GestoreMonteore() {
+        model = new GiornataMonteore();
+        gestoreCSV = new GestoreCSV();
     }
 
-    // ================= LOGIN =================
-    public void login(String user, String pass)
+    // LOGIN
 
-    private void checkAdmin()
+    public void login(Utente utente) {
 
-    // ================= CRUD =================
-    public void aggiungiStudente(String nome, String cognome, String classe){
-        
+        if (utente == null) {
+            throw new IllegalArgumentException("Utente non valido");
+        }
+
+        utenteCorrente = utente;
     }
 
-    public void aggiungiAttivita(String nome, String descrizione, int max){
-        
+    public Utente getUtenteCorrente() {
+        return utenteCorrente;
     }
 
-    public void iscriviStudente(Attivita a, String fascia){
-        
+    // FILE
+
+    public void apriFile(File file) throws IOException, Exception {
+        model = gestoreCSV.leggiCSV(file);
     }
 
-    public void modificaIscrizione(Iscrizione i, Attivita nuova){
-        
+    public void salvaConNome(File file) throws IOException {
+        gestoreCSV.salvaCSV(file, model);
     }
 
-    public void eliminaIscrizione(Iscrizione i){
-        
+    // CONTROLLO ADMIN
+
+    private void checkAdmin() {
+
+        if (!(utenteCorrente instanceof AmministratoreUtente)) {
+            throw new SecurityException("Operazione consentita solo agli admin");
+        }
     }
 
-    public List<Iscrizione> getLista(){
-        
+    // INSERIMENTO ISCRIZIONE
+
+    public void aggiungiIscrizione(Iscrizione iscrizione) {
+        if (iscrizione == null) {
+            throw new IllegalArgumentException("Iscrizione null");
+        }
+
+        // controllo attività piena
+        if (iscrizione.getAttivita().isFull(model.getIscrizioni())) {
+            throw new IllegalStateException("Attività piena");
+        }
+
+        // controllo doppia iscrizione
+        for (Iscrizione i : model.getIscrizioni()) {
+
+            if (i.getStudente().equals(iscrizione.getStudente())
+                    &&
+                    i.getTurno()
+                    .equalsIgnoreCase(
+                            iscrizione.getTurno()
+                    )) {
+
+                throw new IllegalStateException(
+                        "Studente già iscritto in questo turno"
+                );
+            }
+        }
+
+        model.aggiungiStudente(
+                iscrizione.getStudente()
+        );
+
+        model.aggiungiAttivita(
+                iscrizione.getAttivita()
+        );
+
+        model.aggiungiIscrizione(iscrizione);
     }
 
-    // ================= RICERCA =================
-    public List<Iscrizione> cerca(String classe, String attivita){
-        
+    // ==========================
+    // MODIFICA
+    // ==========================
+
+    public void modificaIscrizione(
+            Iscrizione vecchia,
+            Attivita nuovaAttivita
+    ) {
+
+        checkAdmin();
+
+        if (vecchia == null || nuovaAttivita == null) {
+
+            throw new IllegalArgumentException(
+                    "Parametri non validi"
+            );
+        }
+
+        vecchia.setAttivita(nuovaAttivita);
     }
 
-    // ================= ORDINAMENTO =================
-    public List<Studente> ordinaPerCognome(){
-        
-    }
-            
-    if(a.isFull(model.getIscrizioni())) {
-        throw new IllegalStateException("Attività piena");
+    // ==========================
+    // CANCELLAZIONE
+    // ==========================
+
+    public void eliminaIscrizione(
+            Iscrizione iscrizione
+    ) {
+
+        checkAdmin();
+
+        model.rimuoviIscrizione(iscrizione);
     }
 
-    */
+    // ==========================
+    // VISUALIZZA LISTA
+    // ==========================
+
+    public List<Iscrizione> getListaIscrizioni() {
+
+        return model.getIscrizioni();
+    }
+
+    // ==========================
+    // RICERCA
+    // ==========================
+
+    public List<Iscrizione> cerca(
+            String classe,
+            String attivita
+    ) {
+
+        List<Iscrizione> risultati =
+                new ArrayList<>();
+
+        for (Iscrizione i : model.getIscrizioni()) {
+
+            boolean matchClasse =
+                    classe == null
+                    || classe.trim().isEmpty()
+                    || i.getStudente()
+                    .getClasse()
+                    .equalsIgnoreCase(classe);
+
+            boolean matchAttivita =
+                    attivita == null
+                    || attivita.trim().isEmpty()
+                    || i.getAttivita()
+                    .getNome()
+                    .equalsIgnoreCase(attivita);
+
+            if (matchClasse && matchAttivita) {
+
+                risultati.add(i);
+            }
+        }
+
+        return risultati;
+    }
+
+    // ==========================
+    // ORDINAMENTO
+    // ==========================
+
+    public List<Studente> ordinaPerCognome() {
+
+        List<Studente> lista =
+                new ArrayList<>(
+                        model.getStudenti()
+                );
+
+        lista.sort(
+                Comparator.comparing(
+                        Studente::getCognome
+                )
+        );
+
+        return lista;
+    }
+
+    public GiornataMonteore getModel() {
+        return model;
+    }
 }
