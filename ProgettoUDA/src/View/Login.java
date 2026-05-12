@@ -9,11 +9,9 @@ public class Login extends javax.swing.JFrame {
     private GestoreMonteore controller;
     
     public Login(GestoreMonteore controller) {
-
-    this.controller = controller;
-
-    initComponents();
-}
+        this.controller = controller;
+        initComponents();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -72,12 +70,12 @@ public class Login extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(110, 110, 110)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnLogin)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+                    .addComponent(txtPassword))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -125,21 +123,36 @@ public class Login extends javax.swing.JFrame {
         String password = new String(txtPassword.getPassword());
 
         // prova login
-        // da creare metodo login???
-        //Utente u = controller.login(username, password);
+        // DA FARE UN UNICO MAINFRAME CON PERMESSI
+        /*
+        if(u instanceof UtenteAmministratore) {
+
+            new MainFrameAdmin(controller).setVisible(true);
+
+        } else if(u instanceof UtenteStudente) {
+
+            new MainFrameStudente(controller).setVisible(true);
+        }
+        */
+
+dispose();
 
         // messaggio successo
         JOptionPane.showMessageDialog(this,"Login effettuato!");
 
         // apre mainframe
-        //new MainFrame(controller).setVisible(true);
+        new MainFrame(controller).setVisible(true);
 
         // chiude login
         dispose();
 
     } catch(Exception ex) {
-
-        JOptionPane.showMessageDialog(this, ex.getMessage(), "Errore Login", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(
+            this,
+            ex.getMessage(),
+            "Errore Login",
+            JOptionPane.ERROR_MESSAGE
+        );
     }
     }//GEN-LAST:event_btnLoginActionPerformed
 

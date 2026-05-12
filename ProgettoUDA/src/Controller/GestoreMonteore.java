@@ -21,13 +21,17 @@ public class GestoreMonteore {
 
     // LOGIN
 
-    public void login(Utente utente) {
+    public Utente login(String username, String password) throws Exception {
 
-        if (utente == null) {
-            throw new IllegalArgumentException("Utente non valido");
+        if(username.equals("admin") && password.equals("admin4867")) {
+            return new AmministratoreUtente(username, password);
         }
 
-        utenteCorrente = utente;
+        if(username.equals("studente") && password.equals("studente")) {
+            return new StudenteUtente(username, password);
+        }
+
+        throw new Exception("Credenziali errate");
     }
 
     public Utente getUtenteCorrente() {

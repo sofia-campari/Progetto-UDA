@@ -5,13 +5,13 @@ public class Utente {
     protected String password;
 
     public Utente(String username, String password) throws Exception {
-        if (!username.equals("") || !username.equals("")){
+        if (username.equals("") || username.equals("")){
             throw new Exception("ERRORE: nome utente non valido");        
         }
         else {
             this.username = username;
         }
-        if (!password.equals("") || !password.equals("")){
+        if (password.equals("") || password.equals("")){
             throw new Exception("ERRORE: password non valida");        
         }
         else {
