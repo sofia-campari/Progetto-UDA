@@ -56,6 +56,41 @@ public class GestoreMonteore {
             throw new SecurityException("Operazione consentita solo agli admin");
         }
     }
+    
+    public void aggiungiIscrizione(
+        String nome,
+        String cognome,
+        String classe,
+        String turno,
+        String nomeAttivita,
+        boolean iscritto
+        ) throws Exception {
+
+            // crea studente
+            Studente s = new Studente(
+                    nome,
+                    cognome,
+                    classe
+            );
+
+            // crea attività
+            Attivita a = new Attivita(
+                    nomeAttivita,
+                    "luogo non specificato",
+                    30
+            );
+
+            // crea iscrizione
+            Iscrizione iscrizione = new Iscrizione(
+                    s,
+                    a,
+                    turno,
+                    iscritto
+            );
+
+            // usa il metodo che hai già
+            aggiungiIscrizione(iscrizione);
+        }
 
     // INSERIMENTO ISCRIZIONE
 

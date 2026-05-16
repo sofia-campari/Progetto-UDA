@@ -14,7 +14,8 @@ public class MainFrame extends javax.swing.JFrame {
         this.controller = controller;
         initComponents();
         fileOpen.addActionListener(this::openFile);
-        fileSave.addActionListener(this::openFile);
+        // da fare fileSave.addActionListener(this::openFile);
+        editInsert.addActionListener(this::insertInfo);
         editEdit.addActionListener(this::btn_delete);
     }
 
@@ -28,20 +29,6 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        dialogNuovoUtente = new javax.swing.JDialog();
-        jLabel4 = new javax.swing.JLabel();
-        txtNomeDialog = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        txtCognomeDialog = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        txtSezioneDialog = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        txtTurnoDialog = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        txtAttivitàDialog = new javax.swing.JTextField();
-        txtRegistratoDialog = new javax.swing.JTextField();
         jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -68,89 +55,6 @@ public class MainFrame extends javax.swing.JFrame {
         menuInfo = new javax.swing.JMenu();
         infoAbout = new javax.swing.JMenuItem();
         infoCredits = new javax.swing.JMenuItem();
-
-        jLabel4.setText("Insert a new iscription");
-
-        jLabel5.setText("Name:");
-
-        jLabel6.setText("Last name:");
-
-        jLabel7.setText("Section:");
-
-        jLabel8.setText("Turn:");
-
-        jLabel9.setText("Activity:");
-
-        jLabel10.setText("Registered (true or false):");
-
-        javax.swing.GroupLayout dialogNuovoUtenteLayout = new javax.swing.GroupLayout(dialogNuovoUtente.getContentPane());
-        dialogNuovoUtente.getContentPane().setLayout(dialogNuovoUtenteLayout);
-        dialogNuovoUtenteLayout.setHorizontalGroup(
-            dialogNuovoUtenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dialogNuovoUtenteLayout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(dialogNuovoUtenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(dialogNuovoUtenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(dialogNuovoUtenteLayout.createSequentialGroup()
-                            .addComponent(jLabel8)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtTurnoDialog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogNuovoUtenteLayout.createSequentialGroup()
-                            .addComponent(jLabel6)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtCognomeDialog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogNuovoUtenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(dialogNuovoUtenteLayout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(163, 163, 163)
-                                .addComponent(txtNomeDialog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel4))
-                        .addGroup(dialogNuovoUtenteLayout.createSequentialGroup()
-                            .addComponent(jLabel7)
-                            .addGap(159, 159, 159)
-                            .addComponent(txtSezioneDialog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(dialogNuovoUtenteLayout.createSequentialGroup()
-                        .addGroup(dialogNuovoUtenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10))
-                        .addGap(70, 70, 70)
-                        .addGroup(dialogNuovoUtenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtRegistratoDialog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtAttivitàDialog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(656, Short.MAX_VALUE))
-        );
-        dialogNuovoUtenteLayout.setVerticalGroup(
-            dialogNuovoUtenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dialogNuovoUtenteLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jLabel4)
-                .addGap(18, 18, 18)
-                .addGroup(dialogNuovoUtenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(dialogNuovoUtenteLayout.createSequentialGroup()
-                        .addGroup(dialogNuovoUtenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtNomeDialog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
-                        .addGap(18, 18, 18)
-                        .addGroup(dialogNuovoUtenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtCognomeDialog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
-                        .addGap(26, 26, 26)
-                        .addGroup(dialogNuovoUtenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(txtSezioneDialog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(27, 27, 27)
-                        .addGroup(dialogNuovoUtenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(txtTurnoDialog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(34, 34, 34)
-                        .addComponent(jLabel9))
-                    .addComponent(txtAttivitàDialog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(dialogNuovoUtenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(txtRegistratoDialog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(292, Short.MAX_VALUE))
-        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -330,7 +234,11 @@ public class MainFrame extends javax.swing.JFrame {
     
     
     // METODI DI EDIT
-    
+    private void insertInfo(java.awt.event.ActionEvent evt) {
+        //n da chiedere
+        dialogoInserimentoUtente dialog = new dialogoInserimentoUtente(this, true, controller);
+        dialog.setVisible(true);
+    } 
     
     
     
@@ -339,7 +247,6 @@ public class MainFrame extends javax.swing.JFrame {
     }      
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDialog dialogNuovoUtente;
     private javax.swing.JMenuItem editDelete;
     private javax.swing.JMenuItem editEdit;
     private javax.swing.JMenuItem editInsert;
@@ -352,15 +259,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
@@ -373,11 +273,5 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenu menuStatistics;
     private javax.swing.JMenuItem statisticsRanking;
     private javax.swing.JMenuItem statisticsStudentsx;
-    private javax.swing.JTextField txtAttivitàDialog;
-    private javax.swing.JTextField txtCognomeDialog;
-    private javax.swing.JTextField txtNomeDialog;
-    private javax.swing.JTextField txtRegistratoDialog;
-    private javax.swing.JTextField txtSezioneDialog;
-    private javax.swing.JTextField txtTurnoDialog;
     // End of variables declaration//GEN-END:variables
 }
