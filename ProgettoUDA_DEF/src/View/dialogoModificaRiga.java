@@ -1,15 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
 package View;
+
+import Controller.GestoreMonteore;
+import Model.Attivita;
+import Model.Iscrizione;
+import Model.Studente;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Utente
  */
 public class dialogoModificaRiga extends javax.swing.JDialog {
-    
+    private GestoreMonteore controller;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(dialogoModificaRiga.class.getName());
 
     /**
@@ -18,6 +21,8 @@ public class dialogoModificaRiga extends javax.swing.JDialog {
     public dialogoModificaRiga(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        bottoneCerca.addActionListener(this::bottoneCerca);
+        //bottoneModifica.addActionListener(this::modificaIscrizione);
     }
 
     /**
@@ -30,11 +35,18 @@ public class dialogoModificaRiga extends javax.swing.JDialog {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        txtCognomeModifica = new javax.swing.JTextField();
+        bottoneCerca = new javax.swing.JButton();
+        txtIscrizioneUtente = new javax.swing.JTextField();
+        txtCognomeUtente = new javax.swing.JTextField();
+        bottoneModifica = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Insert your surname to edit your registration:");
+
+        bottoneCerca.setText("Search");
+
+        bottoneModifica.setText("Modify");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -43,9 +55,18 @@ public class dialogoModificaRiga extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCognomeModifica, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtCognomeUtente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(76, 76, 76)
+                        .addComponent(bottoneCerca)))
                 .addContainerGap(278, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bottoneModifica)
+                    .addComponent(txtIscrizioneUtente, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -53,13 +74,68 @@ public class dialogoModificaRiga extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtCognomeModifica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(232, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bottoneCerca)
+                    .addComponent(txtCognomeUtente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(txtIscrizioneUtente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(bottoneModifica)
+                .addContainerGap(152, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    private void bottoneCerca(java.awt.event.ActionEvent evt) {                                         
+        String cognome = txtCognomeUtente.getText();
 
+        List<Iscrizione> risultati = controller.cercaPerCognome(cognome);
+
+        if (risultati.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Nessuna iscrizione trovata");
+            return;
+        }
+        
+        Iscrizione i = risultati.get(0);
+
+        String riga =
+                i.getStudente().getNome() + "," +
+                i.getStudente().getCognome() + "," +
+                i.getStudente().getClasse() + "," +
+                i.getTurno() + "," +
+                i.getAttivita().getNome() + "," +
+                i.isIscritto();
+
+        txtIscrizioneUtente.setText(riga);
+    } 
+    
+    private void modificaIscrizione(java.awt.event.ActionEvent evt) throws Exception {
+        String[] campi = txtIscrizioneUtente.getText().split(",");
+
+        if (campi.length != 6) {
+            throw new Exception("Formato non valido");
+        }
+
+        Studente s = new Studente(
+                campi[0],
+                campi[1],
+                campi[2]
+        );
+
+        /*Attivita a = controller.getAttivitaByNome(campi[4]);
+
+        Iscrizione nuova = new Iscrizione(
+                s,
+                a,
+                campi[3],
+                Boolean.parseBoolean(campi[5])
+        );
+        controller.modificaIscrizione(iscrizioneSelezionata, nuova);
+        */
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -98,7 +174,10 @@ public class dialogoModificaRiga extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bottoneCerca;
+    private javax.swing.JButton bottoneModifica;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField txtCognomeModifica;
+    private javax.swing.JTextField txtCognomeUtente;
+    private javax.swing.JTextField txtIscrizioneUtente;
     // End of variables declaration//GEN-END:variables
 }

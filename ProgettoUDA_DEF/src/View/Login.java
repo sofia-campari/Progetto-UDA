@@ -11,6 +11,7 @@ public class Login extends javax.swing.JFrame {
     public Login(GestoreMonteore controller) {
         this.controller = controller;
         initComponents();
+        bottoneLogin.addActionListener(this::btnLoginActionPerformed);
     }
 
     /**
@@ -29,7 +30,7 @@ public class Login extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
-        btnLogin = new javax.swing.JButton();
+        bottoneLogin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,8 +62,7 @@ public class Login extends javax.swing.JFrame {
 
         jLabel2.setText("Password");
 
-        btnLogin.setText("login");
-        btnLogin.addActionListener(this::btnLoginActionPerformed);
+        bottoneLogin.setText("Login");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -70,12 +70,13 @@ public class Login extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(110, 110, 110)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnLogin)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
-                    .addComponent(txtPassword))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bottoneLogin)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+                        .addComponent(txtPassword)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -90,7 +91,7 @@ public class Login extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnLogin)
+                .addComponent(bottoneLogin)
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
@@ -112,39 +113,26 @@ public class Login extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {
 
-    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        // METTERE IL CONTROLLO LOGIN 
         try {
-
-            // prende username
             String username = txtUsername.getText();
 
-            // prende password
             String password = new String(txtPassword.getPassword());
 
+            Utente u = controller.login(username, password);
 
-    dispose();
+            JOptionPane.showMessageDialog(this,"Login effettuato!");
 
-        // messaggio successo
-        JOptionPane.showMessageDialog(this,"Login effettuato!");
+            new MainFrame(controller).setVisible(true);
 
-        // apre mainframe
-        new MainFrame(controller).setVisible(true);
+            dispose();
 
-        // chiude login
-        dispose();
+        } catch(Exception ex) {
 
-    } catch(Exception ex) {
-        JOptionPane.showMessageDialog(
-            this,
-            ex.getMessage(),
-            "Errore Login",
-            JOptionPane.ERROR_MESSAGE
-        );
+            JOptionPane.showMessageDialog(this,ex.getMessage(),"Errore Login",JOptionPane.ERROR_MESSAGE);
+        }
     }
-    }//GEN-LAST:event_btnLoginActionPerformed
-
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -165,11 +153,11 @@ public class Login extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {GestoreMonteore controller =new GestoreMonteore();
         new Login(controller).setVisible(true);
-});
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLogin;
+    private javax.swing.JButton bottoneLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

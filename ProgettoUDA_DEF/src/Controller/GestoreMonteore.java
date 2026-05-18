@@ -95,6 +95,7 @@ public class GestoreMonteore {
     // INSERIMENTO ISCRIZIONE
 
     public void aggiungiIscrizione(Iscrizione iscrizione) {
+
         if (iscrizione == null) {
             throw new IllegalArgumentException("Iscrizione null");
         }
@@ -109,8 +110,7 @@ public class GestoreMonteore {
 
             if (i.getStudente().equals(iscrizione.getStudente())
                     &&
-                    i.getTurno()
-                    .equalsIgnoreCase(
+                    i.getTurno().equalsIgnoreCase(
                             iscrizione.getTurno()
                     )) {
 
@@ -129,27 +129,28 @@ public class GestoreMonteore {
         );
 
         model.aggiungiIscrizione(iscrizione);
+
+        // SALVATAGGIO CSV
+        try {
+
+            gestoreCSV.salvaCSV(gestoreCSV.getFileCorrente(),model);
+
+        } catch(IOException ex) {
+
+            ex.printStackTrace();
+        }
     }
 
     // ==========================
     // MODIFICA
     // ==========================
 
-    public void modificaIscrizione(
-            Iscrizione vecchia,
-            Attivita nuovaAttivita
-    ) {
+    public void modificaIscrizione(Iscrizione vecchia, Iscrizione nuova) throws Exception {
 
-        checkAdmin();
+        model.getIscrizioni().remove(vecchia);
+        model.getIscrizioni().add(nuova);
 
-        if (vecchia == null || nuovaAttivita == null) {
-
-            throw new IllegalArgumentException(
-                    "Parametri non validi"
-            );
-        }
-
-        vecchia.setAttivita(nuovaAttivita);
+        gestoreCSV.salvaCSV(gestoreCSV.getFileCorrente(), model);
     }
 
     // ==========================
@@ -229,6 +230,19 @@ public class GestoreMonteore {
         );
 
         return lista;
+    }
+    
+    public List<Iscrizione> cercaPerCognome(String cognome) {
+
+        List<Iscrizione> risultato = new ArrayList<>();
+
+        for (Iscrizione i : model.getIscrizioni()) {
+            if (i.getStudente().getCognome().equalsIgnoreCase(cognome)) {
+                risultato.add(i);
+            }
+        }
+
+        return risultato;
     }
 
     public GiornataMonteore getModel() {

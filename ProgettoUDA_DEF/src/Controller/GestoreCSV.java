@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GestoreCSV {
-
+    private File fileCorrente;
     // LETTURA CSV
 
     public GiornataMonteore leggiCSV(File file) throws IOException, Exception {
@@ -15,9 +15,9 @@ public class GestoreCSV {
         if (file == null || !file.exists()) {
             throw new FileNotFoundException("File non trovato");
         }
-
+        this.fileCorrente = file;
         GiornataMonteore giornata = new GiornataMonteore();
-
+        
         BufferedReader br = new BufferedReader(new FileReader(file));
 
         // salta intestazione
@@ -92,5 +92,9 @@ public class GestoreCSV {
         }
 
         bw.close();
+    }
+
+    File getFileCorrente() {
+        return fileCorrente;   
     }
 }

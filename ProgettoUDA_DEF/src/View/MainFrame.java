@@ -16,7 +16,7 @@ public class MainFrame extends javax.swing.JFrame {
         fileOpen.addActionListener(this::openFile);
         // da fare fileSave.addActionListener(this::openFile);
         editInsert.addActionListener(this::insertInfo);
-        editEdit.addActionListener(this::btn_delete);
+        editEdit.addActionListener(this::modificaInfo);
     }
 
     /**
@@ -242,8 +242,9 @@ public class MainFrame extends javax.swing.JFrame {
     
     
     
-    private void btn_delete(java.awt.event.ActionEvent evt) {                                         
-        System.out.println("SONO QUI");
+    private void modificaInfo(java.awt.event.ActionEvent evt) {                                         
+        //dialogoModificaRiga dialog = new dialogoModificaRiga(this, true, controller);
+        //dialog.setVisible(true);
     }      
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
